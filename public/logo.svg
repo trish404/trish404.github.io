@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- heart with a 4-point sparkle: mask for the liquid-metal logo -->
+  <path d="M100 178 C 40 134 12 104 12 68 C 12 40 34 20 60 20 C 78 20 92 30 100 44 C 108 30 122 20 140 20 C 166 20 188 40 188 68 C 188 104 160 134 100 178 Z" fill="#000"/>
+  <path d="M160 6 L166 30 L190 36 L166 42 L160 66 L154 42 L130 36 L154 30 Z" fill="#000"/>
+</svg>
