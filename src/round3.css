@@ -220,3 +220,4 @@ button.tb-btn { border: 0; background: none; padding: 0; }
 /* ancestors of a maximized window */
 .max-host { transform: none !important; filter: none !important; perspective: none !important; will-change: auto !important; contain: none !important; backdrop-filter: none !important; z-index: 260 !important; }
 .win.is-max .xp-points li, .win.is-max .pub li { opacity: 1 !important; transform: none !important; }
+.hero { transition: background-color 0.6s ease; }

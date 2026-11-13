@@ -41,21 +41,20 @@ export function Y2KStack() {
   );
 }
 
-const TINTS = [
-  { c: '#ff9ccf', h: 0, n: 'bubblegum' },
-  { c: '#c9b3ff', h: 40, n: 'lavender' },
-  { c: '#9fd8ff', h: 110, n: 'baby blue' },
-  { c: '#9ff0d0', h: 170, n: 'mint' },
-  { c: '#ffd39f', h: 230, n: 'peach' },
-  { c: '#ff8a9e', h: 330, n: 'cherry' }
+// Each swatch is a real wallpaper palette: [main, highlight, accent] fed straight into
+// the ShaderGradient, plus a matching base colour, so the wallpaper matches the swatch.
+export const WALLPAPERS = [
+  { n: 'bubblegum', colors: ['#ff9ccf', '#ffe4f2', '#c9b3ff'], base: '#ffd6ea' },
+  { n: 'lavender', colors: ['#c9b3ff', '#efe6ff', '#ffb3da'], base: '#e6dcff' },
+  { n: 'baby blue', colors: ['#9fd8ff', '#e6f5ff', '#c9b3ff'], base: '#d9efff' },
+  { n: 'mint', colors: ['#9ff0d0', '#e9fff6', '#9fd8ff'], base: '#d8f8ec' },
+  { n: 'peach', colors: ['#ffd39f', '#fff1e0', '#ffb3da'], base: '#ffe6cf' },
+  { n: 'cherry', colors: ['#ff8a9e', '#ffe0e6', '#ffb3da'], base: '#ffd0d8' }
 ];
-export function ColorProps() {
-  const [sel, setSel] = useState(0);
-  const pick = (t, i) => {
-    setSel(i);
-    const bg = document.querySelector('.hero-bg');
-    if (bg) bg.style.filter = t.h ? `hue-rotate(${t.h}deg)` : '';
-  };
+const TINTS = WALLPAPERS.map(w => ({ c: w.colors[0], n: w.n }));
+export function ColorProps({ value = 0, onPick }) {
+  const sel = value;
+  const pick = (t, i) => onPick?.(i);
   return (
     <Window title="Color Properties" icon="sparkle" variant="dialog" className="extra-win color-win">
       <div className="color-tabs"><span className="on">General</span><span>Settings</span></div>

@@ -11,7 +11,7 @@ import PaintApp from './PaintApp.jsx';
 import NowPlaying from './NowPlaying.jsx';
 import DesktopIcons from './DesktopIcons.jsx';
 import PixelIcon from './PixelIcon.jsx';
-import { InfoDialog, PixelLoader, Y2KStack, ColorProps, FlipPhone, RecycleBin } from './DeskExtras.jsx';
+import { InfoDialog, PixelLoader, Y2KStack, ColorProps, FlipPhone, RecycleBin, WALLPAPERS } from './DeskExtras.jsx';
 import { ChromeStar, CD, Butterfly, Twinkle } from './Stickers.jsx';
 import SplitText from './reactbits/SplitText.jsx';
 import DecryptedText from './reactbits/DecryptedText.jsx';
@@ -64,6 +64,8 @@ export default function Hero({ closed, setClosed }) {
   const [size, setSize] = useState(1);
   const [fmt, setFmt] = useState({ b: false, i: false, u: false });
   const [msgIdx, setMsgIdx] = useState(() => Math.floor(Math.random() * messages.length));
+  const [wall, setWall] = useState(0);
+  const wp = WALLPAPERS[wall];
   const msg = messages[msgIdx];
 
   const close = id => setClosed(c => ({ ...c, [id]: true }));
@@ -166,12 +168,12 @@ export default function Hero({ closed, setClosed }) {
   };
 
   return (
-    <section id="home" className="hero" ref={sectionRef}>
+    <section id="home" className="hero" ref={sectionRef} style={{ backgroundColor: wp.base }}>
       <div className="hero-bg" ref={bgRef} aria-hidden="true">
         <ShaderGradientCanvas style={{ position: 'absolute', inset: 0 }} pixelDensity={1} fov={45} pointerEvents="none" preserveDrawingBuffer lazyLoad={false}>
           <ShaderGradient control="props" type="plane" animate="on" uSpeed={0.2} uStrength={2.2} uDensity={1.3} uFrequency={5.5} uAmplitude={1}
             positionX={-1.4} positionY={0} positionZ={0} rotationX={0} rotationY={10} rotationZ={50}
-            color1="#ff9ccf" color2="#ffe4f2" color3="#c9b3ff" reflection={0.1}
+            color1={wp.colors[0]} color2={wp.colors[1]} color3={wp.colors[2]} reflection={0.1}
             cAzimuthAngle={180} cPolarAngle={90} cDistance={3.6} cameraZoom={1} lightType="3d" brightness={1.25} envPreset="city" grain="off" />
         </ShaderGradientCanvas>
       </div>
@@ -188,7 +190,7 @@ export default function Hero({ closed, setClosed }) {
         <div className="extra-item ex-info"><InfoDialog /></div>
         <div className="extra-item ex-loader"><PixelLoader /></div>
         <div className="extra-item ex-y2k"><Y2KStack /></div>
-        <div className="extra-item ex-color"><ColorProps /></div>
+        <div className="extra-item ex-color"><ColorProps value={wall} onPick={setWall} /></div>
         <Drag className="ex-phone"><FlipPhone /></Drag>
         <Drag className="ex-cd2"><CD size={78} /></Drag>
         <Drag className="ex-star-a"><ChromeStar size={70} points={5} /></Drag>
